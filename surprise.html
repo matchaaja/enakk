@@ -63,13 +63,17 @@
   <h1>💗 I Love You 💗</h1>
   <p>You are the most beautiful part of my life 🌹</p>
 
- <audio id="static" autoplay loop>
-  <source src="static/Frank Ocean - White Ferrari.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+  <!-- Audio -->
+  <audio id="loveMusic" loop>
+    <source src="static/white_ferrari.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
-<button click="document.getElementById('loveMusic').play()">▶️ Play Music</button>
+  <!-- Tombol Play -->
+  <button id="playBtn">▶️ Play Music</button>
+
   <script>
+    // Bunga animasi
     function createFlower() {
       const flower = document.createElement("div");
       flower.classList.add("flower");
@@ -77,29 +81,27 @@
       flower.style.top = "100vh";
       flower.style.animationDuration = (5 + Math.random() * 5) + "s";
       document.body.appendChild(flower);
-
       setTimeout(() => flower.remove(), 10000);
     }
-
     setInterval(createFlower, 300);
 
+    // Musik
     const music = document.getElementById('loveMusic');
     const playBtn = document.getElementById('playBtn');
 
-    // Autoplay saat load halaman, fallback ke tombol play jika gagal
+    // Autoplay jika bisa, kalau gagal tampilkan tombol
     window.addEventListener('load', () => {
-      music.play().catch(() => {
-        playBtn.style.display = 'inline-block'; // tampilkan tombol play
+      music.play().then(() => {
+        playBtn.style.display = 'none';
+      }).catch(() => {
+        playBtn.style.display = 'inline-block';
       });
     });
 
     playBtn.addEventListener('click', () => {
       music.play();
-      playBtn.style.display = 'none'; // sembunyikan tombol setelah klik
+      playBtn.style.display = 'none';
     });
-
-    // Sembunyikan tombol play di awal, tampilkan hanya jika autoplay gagal
-    playBtn.style.display = 'none';
   </script>
 </body>
 </html>
